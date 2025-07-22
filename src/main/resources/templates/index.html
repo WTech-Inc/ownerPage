@@ -1,11 +1,389 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
+    <meta name="author" content="WBank">
+    <meta name="keywords" content="WBank,wcoins,泓財,數字銀行,wbank,wcoin,wtech,泓技,WTech">
+    <meta name="robots" content="index,follow">
+    <meta name="description" content="WBank是一個安全自動化數字銀行。" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>主頁</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="/static/bc/contract.js" ></script>
+    <title>wangtry官網</title>
+    <style>
+        body {
+            font-family: 'Noto Sans TC', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black; /* 黑色背景 */
+            color: limegreen; /* 顯眼的綠色文字，可自行調整 */
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #333; /* 深灰色header背景 */
+            color: limegreen;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* 更深的陰影 */
+        }
+
+        h1 {
+            font-size: 28px;
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            align-items: center; /* 垂直置中選單項目 */
+        }
+
+        nav a {
+            color: limegreen;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            margin-left: 15px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: rgba(144, 238, 144, 0.3); /* 淺綠色hover效果 */
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-left: 15px;
+        }
+
+        .dropdown-btn {
+            background: none;
+            border: none;
+            color: limegreen;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-btn:hover {
+            background-color: rgba(144, 238, 144, 0.3); /* 淺綠色hover效果 */
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 120px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 8px;
+            top: 100%; /* 下拉選單顯示在按鈕下方 */
+            left: 0;
+        }
+
+        .dropdown-content a {
+            color: limegreen;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(144, 238, 144, 0.3);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        main {
+            max-width: 960px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: #111; /* 深灰色main背景 */
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* 更深的陰影 */
+            overflow: hidden; /* 確保動畫不會超出範圍 */
+        }
+
+        h2 {
+            color: limegreen;
+            border-bottom: 2px solid limegreen;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+
+        .content-section {
+            transform: translateY(100%); /* 初始位置在下方 */
+            opacity: 0; /* 初始透明度為 0 */
+            animation: slideUp 0.5s ease-out forwards; /* 動畫效果 */
+            margin-bottom: 30px; /* 增加 container 之間的間距 */
+        }
+
+        /* 設定每個 content-section 的動畫延遲時間，讓它們依序出現 */
+        #home-content {
+            animation-delay: 0.2s;
+        }
+
+        #faq-content {
+            display: none; /* 預設隱藏 FAQ 內容 */
+            animation-delay: 0.4s;
+        }
+
+        #service-content {
+            display: none; /* 預設隱藏 FAQ 內容 */
+            animation-delay: 0.4s;
+        }
+
+        #about-content {
+            display: none; /* 預設隱藏 About 內容 */
+            animation-delay: 0.6s;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            background-color: #222; /* 更深的 feature 背景 */
+            border: 1px solid #333; /* 更深的邊框 */
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4); /* 更深的陰影 */
+        }
+
+        .feature img {
+            width: 50px;
+            height: 50px;
+            margin-right: 20px;
+            opacity: 0.8;
+            filter: invert(1); /* 反轉圖片顏色，使其在黑色背景下更顯眼 */
+        }
+
+        .btn-login {
+            display: inline-block;
+            margin: 30px auto;
+            padding: 12px 25px;
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            font-size: 18px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4); /* 更深的陰影 */
+        }
+
+        .btn-login:hover {
+            background-color: #218838;
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.5); /* 更深的陰影 */
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px 0;
+            font-size: 0.9em;
+            color: limegreen;
+            border-top: 1px solid #333; /* 深灰色的上邊框 */
+            background-color: #333; /* 深灰色footer背景 */
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        /* Card */
+        /* From Uiverse.io by YeiserBytes */ 
+:root {
+  --primary-color: #0ea5e9;
+  --secondary-color: #f8fafc;
+  --accent-color: #020617;
+}
+
+.card {
+  margin-left: -1rem;
+  margin-right: -1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  margin-bottom: 2rem;
+  width: 320px;
+  flex-direction: column;
+  border-radius: 1rem;
+  background-color: #020617;
+  padding: 1.5rem;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-size: 1.2rem;
+  line-height: 2rem;
+  font-weight: 700;
+  color: #f8fafc90;
+}
+
+.price {
+  font-size: 3.75rem;
+  line-height: 1;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.desc {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.625;
+  text-wrap: pretty;
+  color: #f8fafc90;
+}
+
+.lists {
+  margin-bottom: 1.5rem;
+  flex: 1 1 0%;
+  color: #f8fafc90;
+}
+
+.lists .list {
+  margin-bottom: 0.5rem;
+  display: flex;
+  margin-left: 0.5rem;
+}
+
+.lists .list svg {
+  height: 1.5rem;
+  width: 1.5rem;
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+  color: #0ea5e9;
+}
+
+.action {
+  border: none;
+  outline: none;
+  display: inline-block;
+  border-radius: 0.5rem;
+  background-color: #0ea5e9;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #f8fafc;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: #0284c7;
+  }
+}
+
+        /* End-Card */
+        /* Google Fonts 引入 */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+    </style>
 </head>
 <body>
-    <h1>wangtry的個人網站</h1>
+
+    <header>
+        <h1>泓財數字銀行 WBank</h1>
+        <nav>
+            <a href="#home" onclick="showContent('home')">首頁</a>
+            <div class="dropdown">
+                <button class="dropdown-btn">更多</button>
+                <div class="dropdown-content">
+                    <a href="#" onclick="showContent('faq')">FAQ</a>
+                    <a href="#" onclick="showContent('sp')">功能與介紹</a>
+                    <a href="#" onclick="showContent('about')">關於</a>
+                </div>
+            </div>
+            <a href="/wbank">登入</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home-content" class="content-section">
+            <h2>主頁</h2>
+            <p>你好👋。</p>
+            <br> <p>這web的後端主要用Spring-boot</p>
+            <p id="result"></p>
+        </section>
+
+        <section id="faq-content" class="content-section">
+            <h2>常見問題 (FAQ)</h2>
+            <p>這裡將會顯示常見問題的解答。</p>
+            <ul>
+                <li><b>問：</b>這是什麼？</li>
+                <li><b>答：</b>這是一個關於wangtry的官網。</li>
+                </ul>
+        </section>
+        <section id="about-content" class="content-section">
+            <h2>關於我</h2>
+            <p>我叫wangtry, WTech泓技創辦人，有2年+IT經驗。</p>
+        </section>
+
+        <section id="sp-content" class="content-section features">
+            <h2>我能做什麼</h2>
+            <div class="feature">
+                <div>
+                    <strong>剪接影片</strong>
+                    <p>高效、處理影片。</p>
+                </div>
+            </div>
+
+            <div class="feature">
+                <div>
+                    <strong>建立web-server</strong>
+                    <p>我有1年多的經驗。</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; WTech&wangtry 版權所有.</p>
+        <p>聯絡方式: owner-wt@wtechhk.com</p>
+        <p>Discord: https://discord.gg/GnVRXsdFW7</p>
+        <br>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function showContent(id) {
+            // 隱藏所有內容區塊
+            document.getElementById('home-content').style.display = 'none';
+            document.getElementById('faq-content').style.display = 'none';
+            document.getElementById('about-content').style.display = 'none';
+            document.querySelector('.features').style.display = 'none';
+            document.querySelector('.user-interface').style.display = 'none';
+
+            // 顯示所選的內容區塊
+            document.getElementById(id + '-content').style.display = 'block';
+        }
+
+        // 初始顯示首頁內容
+        document.addEventListener('DOMContentLoaded', function() {
+            showContent('home');
+        });
+    </script>
+
 </body>
 </html>
