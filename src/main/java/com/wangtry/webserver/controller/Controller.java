@@ -25,6 +25,7 @@ public class Controller {
     }
     @GetMapping("/donate")
     public String payWbank() {
+       try {
         String reqUrl = profile.getWbankCardUrl();
         JSONObject json = new JSONObject(profile.getWbankObject());
         URL url = new URL(reqUrl);
@@ -32,8 +33,7 @@ public class Controller {
         conn.setRequestMethod("PATCH");
         conn.setDoOutput(true);
         conn.setRequestProperty("Content-Type", "application/json");
-        OutputStream os = conn.getOutputStream();
-        os.write(json.toString().getBytes());
+        try (OutputStream os = conn.getOutputStream();) { os.write(json.toString().getBytes()); }
         
         int statusCode = conn.getResponseCode();
         if (statusCode == 200) {
@@ -41,5 +41,6 @@ public class Controller {
         } else {
             return "Not success";
         }
+    } catch (Exception e) { return "Error= "+ e.getMessage(); }
     }
 }
