@@ -16,7 +16,7 @@ public class ownerProfile {
         info.put("hobbies", hobbies);
         return info;
     }
-    public Object getWbankObject() {
+    public Map getWbankObject() {
         Map <String, String> wbankInfo = new HashMap<>();
         wbankInfo.put("cardNumber", "136ac5102067b800ec5d645e26e80074f44e54b560a3481c856aea0d694c6c49");
         wbankInfo.put("password", "Chan1234!");
